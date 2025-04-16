@@ -1,25 +1,27 @@
 const startButton = document.querySelector("#start-button");
-const task = document.querySelector("#task").value;
 const focusTime = document.querySelector("#focus-time");
 const bigBreak = document.querySelector("#break-time");
-const popup = document.querySelector("body");
-const test = document.querySelector("h1");
+const form = document.querySelector("#form")
+const taskUser = document.querySelector("#task-user");
+const timer = document.querySelector("#timer");
+const focusTimer = document.querySelector("#focus-timer");
 
-function displaySecondPopup() {
-    popup.style.display = "none";
-    test.innerText = task;
+
+function displaySecondPopup(userTask) {
+    form.style.display = "none";
+    focusTimer.style.display  = "block";
+    taskUser.innerText = userTask;
+    timer.innerText = focusTime.value + " minutes";
+    /*function gros timer*/
 }
 
 
-startButton.addEventListener("click", () => {
-    displaySecondPopup();
-    /*
-    clear
-    charge tache
-    fonction recup input focus time (to min)
-    fonction recup input focus time (to min)
-    charge timer
-    */
+
+startButton.addEventListener("click", (element) => {
+    element.preventDefault();
+    const task = document.querySelector("#task").value;
+    displaySecondPopup(task);
 })
+
 
 
