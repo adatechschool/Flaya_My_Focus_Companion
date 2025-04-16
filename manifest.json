@@ -1,11 +1,11 @@
 {
-    "name": "Pacifier Extension",
+    "name": "Flaya, my Focus Companion",
     "description": "Base Level Extension",
     "version": "1.0",
     "manifest_version": 3,
     "action": {
       "default_popup": "popup/popup.html",
-      "default_icon": "images/icon_pacifier.png"
+      "default_icon": "images/dragon_icon.png"
     },
     "content_scripts": [
       {
@@ -14,6 +14,16 @@
           "<all_urls>"
         ]
       }
-    ]
+    ],
+    "web_accessible_resources": [
+      {
+      "resources": ["/images/*.png"],
+      "matches": [
+        "<all_urls>"
+      ],
+      "use_dynamic_url": true
+      }
+      ]
+      
 }
      

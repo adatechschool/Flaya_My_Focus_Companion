@@ -10,7 +10,28 @@
 </head>
 <body>
     
-    <h1>Pacifier Extensions</h1>
-    
+    <h1>Flaya, My Focus Companion</h1>
+
+    <label for="task">What do you want to do today?</label> 
+    <input id="task" type="text"> 
+
+    <label for="focus-time"> <strong>Focus time:</strong> for how long? (20 <  ? < 45 min)</label> 
+    <input id="focus-time" type="number" min="20" max="45"> 
+
+    <p> 
+        <strong>Short break:</strong> After each focus-session, take a 5min break.
+    </p>
+
+    <label for="break-time"><strong>Big break:</strong> When you're done, enjoy a bigger break!</label> 
+     <input id="break-time" type="number" min="15" max="30">
+     
+     <br>
+
+    <label for="blocked-url">Websites to block? (URL)</label> 
+    <input id="blocked-url" type="url"> 
+
+    <button id="start-button">START</button>
+    <img src="images/dragon_icon.png" alt="small-dragon">
+
 </body>
 </html>
