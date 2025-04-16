@@ -12,34 +12,53 @@
 
 <body>
 
-    <h1>Flaya, My Focus Companion</h1>
+    <h1>Flaya, my Focus Companion</h1>
     <div class="divInputs">
-        <label for="task">What do you want to do today?</label>
+        <label for="task">What do you want to do today?</label> <br>
         <input id="task" type="text">
     </div>
+   
     <div>
-        <label for="focus-time"> <strong>Focus time:</strong> for how long? (20 < ? < 45 min)</label>
-                <input id="focus-time" type="number" min="20" max="45">
+        <label for="focus-time"> <strong>Focus time:</strong> For how long?</label> <br>
+        <select name="focus-time" id="focus-time"> 
+            <option value="">--Please choose an option--</option>
+            <option value="20">20</option>
+            <option value="25">25</option>
+            <option value="30">30</option>
+            <option value="35">35</option>
+            <option value="40">40</option>
+            <option value="45">45</option>
+        </select>
     </div>
+
     <div>
         <p>
             <strong>Short break:</strong> After each focus-session, take a 5min break.
         </p>
     </div>
-    <div>
-        <label for="break-time"><strong>Big break:</strong> When you're done, enjoy a bigger break!</label>
-        <input id="break-time" type="number" min="15" max="30">
-    </div>
 
     <div>
-        <label for="blocked-url">Websites to block? (URL)</label>
-        <input id="blocked-url" type="url">
+        <label for="break-time"><strong>Big break:</strong> When you're done, enjoy a bigger break!</label> <br>
+        <select name="break-time" id="break-time">
+            <option value="">--Please choose an option--</option>
+            <option value="15">15</option>
+            <option value="20">20</option>
+            <option value="25">25</option>
+            <option value="30">30</option>
+        </select>
+
     </div>
     
-    <div class="footer-popup">
-    <button id="start-button">START</button>
-    <img src="images/dragon_icon.png" alt="small-dragon">
+    <div>
+        <label for="blocked-url">Websites to block?</label> <br>
+        <textarea id="blocked-url" rows="5" class="blocked-url" type="url" placeholder="example.com"></textarea>
     </div>
+
+    <div class="footer-popup">
+        <button id="start-button">START</button>
+        <img src="images/dragon_icon.png" alt="small-dragon">
+    </div>
+
 </body>
 
 </html>

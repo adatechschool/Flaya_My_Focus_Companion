@@ -1,6 +1,6 @@
 {
     "name": "Flaya, my Focus Companion",
-    "description": "Base Level Extension",
+    "description": "A new Pomodoro-like extension to best manage your time",
     "version": "1.0",
     "manifest_version": 3,
     "action": {
