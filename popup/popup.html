@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,30 +9,37 @@
     <script defer src="popup.js"></script>
     <link rel="stylesheet" href="popup.css">
 </head>
+
 <body>
-    
+
     <h1>Flaya, My Focus Companion</h1>
+    <div class="divInputs">
+        <label for="task">What do you want to do today?</label>
+        <input id="task" type="text">
+    </div>
+    <div>
+        <label for="focus-time"> <strong>Focus time:</strong> for how long? (20 < ? < 45 min)</label>
+                <input id="focus-time" type="number" min="20" max="45">
+    </div>
+    <div>
+        <p>
+            <strong>Short break:</strong> After each focus-session, take a 5min break.
+        </p>
+    </div>
+    <div>
+        <label for="break-time"><strong>Big break:</strong> When you're done, enjoy a bigger break!</label>
+        <input id="break-time" type="number" min="15" max="30">
+    </div>
 
-    <label for="task">What do you want to do today?</label> 
-    <input id="task" type="text"> 
-
-    <label for="focus-time"> <strong>Focus time:</strong> for how long? (20 <  ? < 45 min)</label> 
-    <input id="focus-time" type="number" min="20" max="45"> 
-
-    <p> 
-        <strong>Short break:</strong> After each focus-session, take a 5min break.
-    </p>
-
-    <label for="break-time"><strong>Big break:</strong> When you're done, enjoy a bigger break!</label> 
-     <input id="break-time" type="number" min="15" max="30">
-     
-     <br>
-
-    <label for="blocked-url">Websites to block? (URL)</label> 
-    <input id="blocked-url" type="url"> 
-
+    <div>
+        <label for="blocked-url">Websites to block? (URL)</label>
+        <input id="blocked-url" type="url">
+    </div>
+    
+    <div class="footer-popup">
     <button id="start-button">START</button>
     <img src="images/dragon_icon.png" alt="small-dragon">
-
+    </div>
 </body>
+
 </html>
