@@ -1,3 +1,4 @@
+const testTimer = document.querySelector('#timer')
 
 function timer(userTime) {
     let minutes = userTime;
@@ -5,16 +6,17 @@ function timer(userTime) {
 
     const timing = setInterval(() => {
         if (secondes % 60 == 0) {
-            console.log(minutes--)
+            minutes--
         }
-        console.log(secondes--);
+        
+        secondes-- 
 
         if (secondes < 0) {
-            clearInterval(timing)
+            clearInterval(timing);
         }
+        testTimer.innerText = `Il reste ${minutes} et ${secondes}`
 
-    }, 100)
-
+    }, 1000)
 
 }
 
