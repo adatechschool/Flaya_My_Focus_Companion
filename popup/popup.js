@@ -7,34 +7,34 @@ const timer = document.querySelector("#timer");
 const focusTimer = document.querySelector("#focus-timer");
 
 
- 
+
 function timerDisplay(userTime) {
     let minutes = userTime;
-    let secondes =  60;
-    
-    
+    let secondes = 60;
+
+
     const timing = setInterval(() => {
-    if (secondes == 0) {
+        if (secondes == 0) {
             minutes--
             secondes = 60
         }
 
-        secondes-- 
+        secondes--
 
         if (minutes === 0 && secondes === 0) {
             clearInterval(timing);
         }
-        timer.innerText = `Il reste ${minutes-1} minutes et ${secondes-1} secondes`
+        timer.innerText = `${minutes - 1}  : ${secondes - 1} `
 
     }, 1000)
-        return timer.innerText = `Il reste ${minutes-1} minutes et ${secondes-1} secondes`
+    return timer.innerText = `${minutes - 1}  : ${secondes - 1} `
 
 }
 
 
 function displaySecondPopup(userTask) {
     form.style.display = "none";
-    focusTimer.style.display  = "block";
+    focusTimer.style.display = "block";
     taskUser.innerText = userTask;
     timer.innerText = `Il reste ${focusTime.value} minutes`
     setTimeout(() => {
@@ -50,7 +50,7 @@ startButton.addEventListener("click", (element) => {
     element.preventDefault();
     const task = document.querySelector("#task").value;
     displaySecondPopup(task);
-    
+
 })
 
 
