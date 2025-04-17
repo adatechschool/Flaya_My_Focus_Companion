@@ -24,10 +24,10 @@ function timerDisplay(userTime) {
         if (minutes === 0 && secondes === 0) {
             clearInterval(timing);
         }
-        timer.innerText = `Il reste ${minutes-1} minutes et ${secondes} secondes`
+        timer.innerText = `Il reste ${minutes-1} minutes et ${secondes-1} secondes`
 
     }, 1000)
-        return timer.innerText = `Il reste ${minutes-1} minutes et ${secondes} secondes`
+        return timer.innerText = `Il reste ${minutes-1} minutes et ${secondes-1} secondes`
 
 }
 
@@ -36,8 +36,10 @@ function displaySecondPopup(userTask) {
     form.style.display = "none";
     focusTimer.style.display  = "block";
     taskUser.innerText = userTask;
-    // timer.innerText = `Il reste ${focusTime.value} minutes`
-    timer.innerText = timerDisplay(focusTime.value);
+    timer.innerText = `Il reste ${focusTime.value} minutes`
+    setTimeout(() => {
+        timer.innerText = timerDisplay(focusTime.value);
+    }, 1000);
 
     /*function gros timer*/
 }
@@ -53,9 +55,8 @@ startButton.addEventListener("click", (element) => {
 
 
 /* 
-Dans notre second popup 
-on veut afficher timerDisplay quand on click sur start.
+Le chrono ne reste pas quand on ferme la popup.
+Voir comment faire 
 
 */
-
 
