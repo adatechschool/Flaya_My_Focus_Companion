@@ -3,6 +3,7 @@
     "description": "A new Pomodoro-like extension to best manage your time",
     "version": "1.0",
     "manifest_version": 3,
+    "permissions": ["scripting", "activeTab", "tabs"],
     "action": {
       "default_popup": "popup/popup.html",
       "default_icon": "images/dragon_icon.png"
@@ -24,6 +25,4 @@
       "use_dynamic_url": true
       }
       ]
-      
 }
-     
