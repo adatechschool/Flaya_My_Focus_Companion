@@ -11,8 +11,7 @@ const focusTimer = document.querySelector("#focus-timer");
 function timerDisplay(userTime) {
     let minutes = userTime;
     let secondes =  60;
-
-    testTimer.innerText = `Il reste ${minutes} minutes`
+    
     
     const timing = setInterval(() => {
     if (secondes == 0) {
@@ -25,9 +24,10 @@ function timerDisplay(userTime) {
         if (minutes === 0 && secondes === 0) {
             clearInterval(timing);
         }
-        testTimer.innerText = `Il reste ${minutes-1} minutes et ${secondes} secondes`
+        timer.innerText = `Il reste ${minutes-1} minutes et ${secondes} secondes`
 
     }, 1000)
+        return timer.innerText = `Il reste ${minutes-1} minutes et ${secondes} secondes`
 
 }
 
@@ -36,7 +36,9 @@ function displaySecondPopup(userTask) {
     form.style.display = "none";
     focusTimer.style.display  = "block";
     taskUser.innerText = userTask;
-    timer.innerText = focusTime.value + " minutes";
+    // timer.innerText = `Il reste ${focusTime.value} minutes`
+    timer.innerText = timerDisplay(focusTime.value);
+
     /*function gros timer*/
 }
 
@@ -49,5 +51,11 @@ startButton.addEventListener("click", (element) => {
     
 })
 
+
+/* 
+Dans notre second popup 
+on veut afficher timerDisplay quand on click sur start.
+
+*/
 
 
