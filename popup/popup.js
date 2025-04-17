@@ -12,19 +12,13 @@ function displaySecondPopup(userTask) {
     focusTimer.style.display  = "block";
     taskUser.innerText = userTask;
     timer.innerText = focusTime.value + " minutes";
-    /*function gros timer*/
 }
-
-
 
 // startButton.addEventListener("click", (element) => {
 //     element.preventDefault();
 //     const task = document.querySelector("#task").value;
 //     displaySecondPopup(task);
 // })
-
-
-
 
 startButton.addEventListener("click", () => {
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {

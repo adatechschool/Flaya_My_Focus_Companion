@@ -1,28 +1,40 @@
 {
-    "name": "Flaya, my Focus Companion",
-    "description": "A new Pomodoro-like extension to best manage your time",
-    "version": "1.0",
-    "manifest_version": 3,
-    "permissions": ["scripting", "activeTab", "tabs"],
-    "action": {
-      "default_popup": "popup/popup.html",
-      "default_icon": "images/dragon_icon.png"
-    },
-    "content_scripts": [
-      {
-        "js": ["scripts/content.js"],
-        "matches": [
-          "<all_urls>"
-        ]
-      }
-    ],
-    "web_accessible_resources": [
-      {
-      "resources": ["/images/*.png"],
+  "name": "Flaya, my Focus Companion",
+  "description": "A new Pomodoro-like extension to best manage your time",
+  "version": "1.0",
+  "manifest_version": 3,
+  "permissions": [
+    "scripting",
+    "activeTab",
+    "tabs"
+  ],
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_icon": "images/dragon_icon.png"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "scripts/content.js"
+      ],
+      "css": [
+        "scripts/content.css"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "/images/*.png",
+        "scripts/dragon_icon.png"
+      ],
       "matches": [
         "<all_urls>"
       ],
       "use_dynamic_url": true
-      }
-      ]
+    }
+  ]
 }
