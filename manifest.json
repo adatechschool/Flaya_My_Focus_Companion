@@ -2,6 +2,7 @@
     "name": "Flaya, my Focus Companion",
     "description": "A new Pomodoro-like extension to best manage your time",
     "version": "1.0",
+    "permissions": ["storage"],
     "manifest_version": 3,
     "action": {
       "default_popup": "popup/popup.html",
