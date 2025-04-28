@@ -52,5 +52,18 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         overlayImageBreak.classList.add("my-overlay-image");
         overlayImageBreak.src = chrome.runtime.getURL("scripts/dragon_icon.png");
         overlayPopupBreak.appendChild(overlayImageBreak);
+
+        overlayButtonNotFinished.addEventListener("click", () => {
+            chrome.storage.local.set({ restartTimer: true }, () => {
+            });
+            overlayBreak.style.display = "none";
+            overlayPopupBreak.style.display = "none";
+            overlayMessageBreak.style.display = "none";
+            overlayButtonFinished.style.display = "none";
+            overlayButtonNotFinished.style.display = "none";
+            overlayImageBreak.style.display = "none";
+        });
+        
     }
 });
+
