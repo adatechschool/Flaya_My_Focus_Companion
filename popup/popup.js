@@ -20,9 +20,15 @@ function displaySecondPopup(userTask) {
 //     displaySecondPopup(task);
 // })
 
-startButton.addEventListener("click", () => {
+// startButton.addEventListener("click", () => {
+//     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+//       chrome.tabs.sendMessage(tabs[0].id, { action: "blockedSite" });
+//     });
+//   });
+
+  startButton.addEventListener("click", () => {
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-      chrome.tabs.sendMessage(tabs[0].id, { action: "changeColor" });
+      chrome.tabs.sendMessage(tabs[0].id, { action: "breakTime" });
     });
   });
 

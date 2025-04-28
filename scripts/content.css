@@ -24,10 +24,32 @@
     z-index: 9000;
 }
 
-.my-overlay-message-blocked {
+.my-overlay-message {
     color: #000;
 }
 
-.my-overlay-image-blocked {
+.my-overlay-image {
     width : 30%;
+}
+
+
+.my-overlay-button-finished {
+    margin: 3%;
+    padding: 12px 28px;
+    background-color: #04AA6D;
+    border-radius: 2em;
+    transition: transform 0.4s;
+    cursor: pointer;
+}
+
+.my-overlay-button-not-finished {
+    padding: 12px 28px;
+    background-color: #F44336;
+    border-radius: 2em;
+    transition: transform 0.4s;
+    cursor: pointer;
+}
+
+.my-overlay-button-not-finished:hover, .my-overlay-button-finished:hover  {
+    transform: scale(1.1)
 }
