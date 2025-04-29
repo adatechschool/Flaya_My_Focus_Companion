@@ -48,13 +48,19 @@ function displaySecondPopup(userTask) {
 
     chrome.storage.local.set({ endTime: endTime, task: task}, () => {
         startTimer(endTime);
+        chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+            chrome.tabs.sendMessage(tabs[0].id, { action: "startFocusTimer" });
+            });
     });
 }
 
 startButton.addEventListener("click", (element) => {
     element.preventDefault();
+
     const task = document.querySelector("#task").value;
-    displaySecondPopup(task);
+    displaySecondPopup(task); //timer
+
+  
 });
 
 // Quand on ouvre/recharge la page, vérifier s'il y a un timer en cours

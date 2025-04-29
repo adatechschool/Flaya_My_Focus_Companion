@@ -21,6 +21,7 @@
 //         overlayPopupBlocked.appendChild(overlayImageBlocked);
 //     }
 // });
+
 let timing;
 function startTimer(endTime) {
     clearInterval(timing);
@@ -59,6 +60,27 @@ window.addEventListener("load", () => {
     }
     );
 });
+
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+    if (request.action === "startFocusTimer") {
+        chrome.storage.local.get(['endTime'], (result) => {
+            console.log(result.endTime)
+            if (result.endTime) {
+                const now = Date.now();
+                console.log(result.endTime)
+                if (result.endTime > now) {
+    
+                    startTimer(result.endTime);
+                }
+                // } else {
+                //     chrome.storage.local.remove(['endTime']);
+                // }
+            }
+        }
+        );
+     }
+})
+
 
 function showOverlay() {
     const overlayBreak = document.createElement("div");
