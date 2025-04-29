@@ -8,9 +8,6 @@ const focusTimer = document.querySelector("#focus-timer");
 
 let timing;
 
-
-/*lancement du breaktime a faire si BUTTON TASK NOT FINISH*/
-
 function startTimer(endTime) {
     clearInterval(timing);
 
@@ -20,11 +17,6 @@ function startTimer(endTime) {
 
         if (diff <= 0) {
             clearInterval(timing);
-            // chrome.storage.local.remove(['endTime']);
-            // /**overlay finish or not**/
-            // chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-            //     chrome.tabs.sendMessage(tabs[0].id, { action: "breakTime" });
-            // });
             return;
         }
 
@@ -44,7 +36,6 @@ function displaySecondPopup(userTask) {
 
     const endTime = Date.now() + durationMinutes * 60 * 1000;
     const task = document.querySelector("#task").value;
-    const breakEndTime = Date.now() + 5 * 60 * 1000;
 
     chrome.storage.local.set({ endTime: endTime, task: task}, () => {
         startTimer(endTime);
@@ -58,7 +49,7 @@ startButton.addEventListener("click", (element) => {
     element.preventDefault();
 
     const task = document.querySelector("#task").value;
-    displaySecondPopup(task); //timer
+    displaySecondPopup(task); 
 
   
 });
@@ -87,23 +78,3 @@ chrome.storage.local.get(['endTime', 'task', 'restartTimer', 'breakEndTime'], (r
     // chrome.storage.local.remove('restartTimer');
 }
 );
-
-function startTimerBreak() {
-    clearInterval(timing);
-
-    timing = setInterval(() => {
-        const now = Date.now();
-        const diff = result.breakEndTime - now;
-
-        if (diff <= 0) {
-            clearInterval(timing);
-            chrome.storage.local.remove(['breakEndTime']);
-            return;
-        }
-
-        const minutes = Math.floor(diff / 1000 / 60);
-        const seconds = Math.floor((diff / 1000) % 60);
-
-        timer.innerText = `${minutes} : ${seconds < 10 ? '0' : ''}${seconds}`;
-    }, 1000);
-}

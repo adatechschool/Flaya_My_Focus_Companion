@@ -1,4 +1,3 @@
-
 // chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 //     if (request.action === "blockedSite") {
 
@@ -23,14 +22,15 @@
 // });
 
 let timing;
-function startTimer(endTime) {
+
+function startTimer(endTime, type) {
     clearInterval(timing);
 
     timing = setInterval(() => {
         const now = Date.now();
         const diff = endTime - now;
 
-        if (diff <= 0) {
+        if (diff <= 0 && type === 1) {
             clearInterval(timing);
             //chrome.storage.local.remove(['endTime']);
             /**overlay finish or not**/
@@ -39,6 +39,11 @@ function startTimer(endTime) {
             // });
             showOverlay();
             return;
+        }
+
+        if (diff <= 0 && type === 2) {
+            clearInterval(timing);
+            showOverlayEndBreak();
         }
     }, 1000);
 }
@@ -51,7 +56,7 @@ window.addEventListener("load", () => {
             console.log(result.endTime)
             if (result.endTime > now) {
 
-                startTimer(result.endTime);
+                startTimer(result.endTime, 1);
             }
             // } else {
             //     chrome.storage.local.remove(['endTime']);
@@ -64,13 +69,11 @@ window.addEventListener("load", () => {
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.action === "startFocusTimer") {
         chrome.storage.local.get(['endTime'], (result) => {
-            console.log(result.endTime)
             if (result.endTime) {
                 const now = Date.now();
-                console.log(result.endTime)
                 if (result.endTime > now) {
-    
-                    startTimer(result.endTime);
+
+                    startTimer(result.endTime, 1);
                 }
                 // } else {
                 //     chrome.storage.local.remove(['endTime']);
@@ -78,7 +81,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
             }
         }
         );
-     }
+    }
 })
 
 
@@ -86,7 +89,7 @@ function showOverlay() {
     const overlayBreak = document.createElement("div");
     overlayBreak.classList.add("my-overlay");
     document.body.appendChild(overlayBreak);
-    console.log("coucou")
+
     const overlayPopupBreak = document.createElement("div");
     overlayPopupBreak.classList.add("my-overlay-popup-blocked");
     document.body.appendChild(overlayPopupBreak);
@@ -112,10 +115,9 @@ function showOverlay() {
     overlayPopupBreak.appendChild(overlayImageBreak);
 
     overlayButtonNotFinished.addEventListener("click", () => {
-        const breakEndTime = Date.now() + 0.2 * 60 * 1000;
-
+        const breakEndTime = Date.now() + 0.1 * 60 * 1000;
         chrome.storage.local.set({ endTime: breakEndTime, task: "Break Time" }, () => {
-            startTimer(breakEndTime);
+            startTimer(breakEndTime, 2);
         });
         overlayBreak.style.display = "none";
         overlayPopupBreak.style.display = "none";
@@ -126,6 +128,49 @@ function showOverlay() {
     });
 
 }
+
+function showOverlayEndBreak() {
+    const overlayBreak = document.createElement("div");
+    overlayBreak.classList.add("my-overlay");
+    document.body.appendChild(overlayBreak);
+
+    const overlayPopupBreak = document.createElement("div");
+    overlayPopupBreak.classList.add("my-overlay-popup-blocked");
+    document.body.appendChild(overlayPopupBreak);
+
+    const overlayMessageBreak = document.createElement("p");
+    overlayMessageBreak.classList.add("my-overlay-message");
+    overlayMessageBreak.innerText = `Your break is over, time to start again ? `;
+    overlayPopupBreak.appendChild(overlayMessageBreak);
+
+    const overlayButtonBreakFinished = document.createElement("button");
+    overlayButtonBreakFinished.classList.add("my-overlay-button-finished");
+    overlayButtonBreakFinished.innerText = "Yes";
+    overlayPopupBreak.appendChild(overlayButtonBreakFinished);
+
+    const overlayImageBreak = document.createElement("img");
+    overlayImageBreak.classList.add("my-overlay-image");
+    overlayImageBreak.src = chrome.runtime.getURL("scripts/dragon_icon.png");
+    overlayPopupBreak.appendChild(overlayImageBreak);
+
+    // overlayButtonBreakFinished.addEventListener("click", () => {
+    //     chrome.storage.local.get(['endTime'], (result) => {
+
+    //         chrome.storage.local.set({ endTime: result.endTime, task: "Focus Time" }, () => {
+    //             startTimer(result.endTime, 1)
+    //         })
+    //     }
+    //     );
+    //     ;
+    // });
+    // overlayBreak.style.display = "none";
+    // overlayPopupBreak.style.display = "none";
+    // overlayMessageBreak.style.display = "none";
+    // overlayButtonFinished.style.display = "none";
+    // overlayButtonNotFinished.style.display = "none";
+    // overlayImageBreak.style.display = "none";
+};
+
 
 // chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 //     if (request.action === "breakTime") {
