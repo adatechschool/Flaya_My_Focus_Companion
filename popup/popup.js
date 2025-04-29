@@ -20,12 +20,11 @@ function startTimer(endTime) {
 
         if (diff <= 0) {
             clearInterval(timing);
-            chrome.storage.local.remove(['endTime']);
-            /**overlay finish or not**/
-            chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-                chrome.tabs.sendMessage(tabs[0].id, { action: "breakTime" });
-            });
-
+            // chrome.storage.local.remove(['endTime']);
+            // /**overlay finish or not**/
+            // chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+            //     chrome.tabs.sendMessage(tabs[0].id, { action: "breakTime" });
+            // });
             return;
         }
 
@@ -45,8 +44,9 @@ function displaySecondPopup(userTask) {
 
     const endTime = Date.now() + durationMinutes * 60 * 1000;
     const task = document.querySelector("#task").value;
+    const breakEndTime = Date.now() + 5 * 60 * 1000;
 
-    chrome.storage.local.set({ endTime: endTime, task: task }, () => {
+    chrome.storage.local.set({ endTime: endTime, task: task}, () => {
         startTimer(endTime);
     });
 }
@@ -58,8 +58,8 @@ startButton.addEventListener("click", (element) => {
 });
 
 // Quand on ouvre/recharge la page, vérifier s'il y a un timer en cours
-chrome.storage.local.get(['endTime', 'task', 'restartTimer'], (result) => {
-    if (result.endTime && result.task) {
+chrome.storage.local.get(['endTime', 'task', 'restartTimer', 'breakEndTime'], (result) => {
+    if (result.endTime) {
         const now = Date.now();
 
         if (result.endTime > now) {
@@ -68,17 +68,36 @@ chrome.storage.local.get(['endTime', 'task', 'restartTimer'], (result) => {
             taskUser.innerText = result.task;
             startTimer(result.endTime);
         } else {
-            chrome.storage.local.remove(['endTime', 'task']);
+            //chrome.storage.local.remove(['endTime', 'task']);
         }
     }
 
-    if (result.restartTimer) {
-        form.style.display = "none";
-        focusTimer.style.display = "block";
-        timer.innerText = "timer de 5 minutes à faire à la place";
-        chrome.storage.local.remove('restartTimer');
-    }
-});
+    // if (result.breakEndTime) {
+    //     form.style.display = "none";
+    //     focusTimer.style.display = "block";
+    //     timer.innerText = "timer de 5 minutes à faire à la place";
+    //     startTimerBreak();
+    // }
+    // chrome.storage.local.remove('restartTimer');
+}
+);
 
+function startTimerBreak() {
+    clearInterval(timing);
 
+    timing = setInterval(() => {
+        const now = Date.now();
+        const diff = result.breakEndTime - now;
 
+        if (diff <= 0) {
+            clearInterval(timing);
+            chrome.storage.local.remove(['breakEndTime']);
+            return;
+        }
+
+        const minutes = Math.floor(diff / 1000 / 60);
+        const seconds = Math.floor((diff / 1000) % 60);
+
+        timer.innerText = `${minutes} : ${seconds < 10 ? '0' : ''}${seconds}`;
+    }, 1000);
+}
