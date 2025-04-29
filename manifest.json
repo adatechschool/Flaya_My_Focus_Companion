@@ -2,7 +2,10 @@
     "name": "Flaya, my Focus Companion",
     "description": "A new Pomodoro-like extension to best manage your time",
     "version": "1.0",
-    "permissions": ["storage"],
+    "permissions": ["storage", 
+    "scripting",
+    "activeTab",
+    "tabs"],
     "manifest_version": 3,
     "action": {
       "default_popup": "popup/popup.html",
@@ -11,6 +14,9 @@
     "content_scripts": [
       {
         "js": ["scripts/content.js"],
+        "css": [
+          "scripts/content.css"
+        ],
         "matches": [
           "<all_urls>"
         ]
@@ -18,7 +24,7 @@
     ],
     "web_accessible_resources": [
       {
-      "resources": ["/images/*.png"],
+      "resources": ["/images/*.png", "scripts/dragon_icon.png"],
       "matches": [
         "<all_urls>"
       ],

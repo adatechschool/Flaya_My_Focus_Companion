@@ -6,63 +6,10 @@ const taskUser = document.querySelector("#task-user");
 const timer = document.querySelector("#timer");
 const focusTimer = document.querySelector("#focus-timer");
 
+let timing;
 
 
-// function timerDisplay(userTime) {
-//     let minutes = userTime;
-//     let secondes = 60;
-
-
-//     const timing = setInterval(() => {
-//         if (secondes == 0) {
-//             minutes--
-//             secondes = 60
-//         }
-
-//         secondes--
-
-//         if (minutes === 0 && secondes === 0) {
-//             clearInterval(timing);
-//         }
-//         timer.innerText = `${minutes - 1}  : ${secondes - 1} `
-
-//     }, 1000)
-//     return timer.innerText = `${minutes - 1}  : ${secondes - 1} `
-
-// }
-
-
-// function displaySecondPopup(userTask) {
-//     form.style.display = "none";
-//     focusTimer.style.display = "block";
-//     taskUser.innerText = userTask;
-//     timer.innerText = `Il reste ${focusTime.value} minutes`
-//     setTimeout(() => {
-//         timer.innerText = timerDisplay(focusTime.value);
-//     }, 1000);
-
-//     /*function gros timer*/
-// }
-
-
-
-// startButton.addEventListener("click", (element) => {
-//     element.preventDefault();
-//     const task = document.querySelector("#task").value;
-//     displaySecondPopup(task);
-
-// })
-
-
-/* 
-Le chrono ne reste pas quand on ferme la popup.
-Voir comment faire 
-
-*/
-
-/******************* */
-
-let timing; // Pour pouvoir clearInterval plus tard
+/*lancement du breaktime a faire si BUTTON TASK NOT FINISH*/
 
 function startTimer(endTime) {
     clearInterval(timing);
@@ -71,9 +18,14 @@ function startTimer(endTime) {
         const now = Date.now();
         const diff = endTime - now;
 
-        if (diff <= 0) { /*lancement du breaktime a faire*/
+        if (diff <= 0) {
             clearInterval(timing);
             chrome.storage.local.remove(['endTime']);
+            /**overlay finish or not**/
+            chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+                chrome.tabs.sendMessage(tabs[0].id, { action: "breakTime" });
+            });
+
             return;
         }
 
@@ -94,11 +46,10 @@ function displaySecondPopup(userTask) {
     const endTime = Date.now() + durationMinutes * 60 * 1000;
     const task = document.querySelector("#task").value;
 
-    chrome.storage.local.set({ endTime: endTime, task: task}, () => {
+    chrome.storage.local.set({ endTime: endTime, task: task }, () => {
         startTimer(endTime);
     });
 }
-
 
 startButton.addEventListener("click", (element) => {
     element.preventDefault();
@@ -107,7 +58,7 @@ startButton.addEventListener("click", (element) => {
 });
 
 // Quand on ouvre/recharge la page, vérifier s'il y a un timer en cours
-chrome.storage.local.get(['endTime', 'task'], (result) => {
+chrome.storage.local.get(['endTime', 'task', 'restartTimer'], (result) => {
     if (result.endTime && result.task) {
         const now = Date.now();
 
@@ -120,6 +71,14 @@ chrome.storage.local.get(['endTime', 'task'], (result) => {
             chrome.storage.local.remove(['endTime', 'task']);
         }
     }
+
+    if (result.restartTimer) {
+        form.style.display = "none";
+        focusTimer.style.display = "block";
+        timer.innerText = "timer de 5 minutes à faire à la place";
+        chrome.storage.local.remove('restartTimer');
+    }
 });
+
 
 
