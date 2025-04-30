@@ -21,10 +21,12 @@ function startTimer(endTime, type) {
 
         if (diff <= 0 && type === 3) {
             clearInterval(timing); 
+            showOverlayEndBigBreak();
         }
 
     }, 1000);
 }
+
     
 window.addEventListener("load", () => {
     chrome.storage.local.get(['endTime'], (result) => {
@@ -158,5 +160,32 @@ function showOverlayEndBreak() {
         overlayImageBreak.style.display = "none";
     })
 };
+
+function showOverlayEndBigBreak() {
+    const overlayBreak = document.createElement("div");
+    overlayBreak.classList.add("my-overlay");
+    document.body.appendChild(overlayBreak);
+    
+    const overlayPopupBreak = document.createElement("div");
+    overlayPopupBreak.classList.add("my-overlay-popup-blocked");
+    document.body.appendChild(overlayPopupBreak);
+
+    const overlayMessageBreak = document.createElement("p");
+    overlayMessageBreak.classList.add("my-overlay-message");
+    overlayMessageBreak.innerText = `Big Break over - Do you want to start a new task ? `;
+    overlayPopupBreak.appendChild(overlayMessageBreak);
+
+    const overlayImageBreak = document.createElement("img");
+    overlayImageBreak.classList.add("my-overlay-image");
+    overlayImageBreak.src = chrome.runtime.getURL("scripts/dragon_icon.png");
+    overlayPopupBreak.appendChild(overlayImageBreak);
+
+    window.addEventListener("click", () => {
+        overlayBreak.style.display = "none";
+        overlayPopupBreak.style.display = "none";
+        overlayMessageBreak.style.display = "none";
+        overlayImageBreak.style.display = "none";
+    })
+}
                 
             
