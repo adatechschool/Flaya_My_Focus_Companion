@@ -39,7 +39,7 @@ window.addEventListener("load", () => {
     });
 });
     
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+chrome.runtime.onMessage.addListener((request) => {
     if (request.action === "startFocusTimer") {
         chrome.storage.local.get(['endTime'], (result) => {
             if (result.endTime) {
