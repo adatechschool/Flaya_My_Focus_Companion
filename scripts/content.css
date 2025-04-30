@@ -15,9 +15,9 @@
     align-items: center;
     text-align: center;
     background-color: white;
-    top : 25%;
-    left : 25% ;
-    right : 25%;
+    top: 25%;
+    left: 25%;
+    right: 25%;
     width: 50%;
     height: 50%;
     border-radius: 10px;
@@ -29,9 +29,8 @@
 }
 
 .my-overlay-image {
-    width : 30%;
+    width: 30%;
 }
-
 
 .my-overlay-button-finished {
     margin: 3%;
@@ -50,6 +49,7 @@
     cursor: pointer;
 }
 
-.my-overlay-button-not-finished:hover, .my-overlay-button-finished:hover  {
+.my-overlay-button-not-finished:hover,
+.my-overlay-button-finished:hover {
     transform: scale(1.1)
 }
