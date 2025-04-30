@@ -27,7 +27,6 @@ function startTimer(endTime, type) {
     }, 1000);
 }
 
-    
 window.addEventListener("load", () => {
     chrome.storage.local.get(['endTime'], (result) => {
         if (result.endTime) {
@@ -55,9 +54,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
      
 function showOverlayEndFocus() {
 
-    const overlayBreak = document.createElement("div");
-    overlayBreak.classList.add("my-overlay");
-    document.body.appendChild(overlayBreak);
+    let divBlur = displayBlur();
     
     const overlayPopupBreak = document.createElement("div");
     overlayPopupBreak.classList.add("my-overlay-popup-blocked");
@@ -80,10 +77,7 @@ function showOverlayEndFocus() {
     overlayButtonNotFinished.innerText = "No";
     overlayPopupBreak.appendChild(overlayButtonNotFinished);
     
-    const overlayImageBreak = document.createElement("img");
-    overlayImageBreak.classList.add("my-overlay-image");
-    overlayImageBreak.src = chrome.runtime.getURL("scripts/dragon_icon.png");
-    overlayPopupBreak.appendChild(overlayImageBreak);
+    displayImage(overlayPopupBreak);
     
     overlayButtonNotFinished.addEventListener("click", () => {
         
@@ -92,12 +86,8 @@ function showOverlayEndFocus() {
             startTimer(breakEndTime, 2);
         });
 
-        overlayBreak.style.display = "none";
+        divBlur.style.display = "none";
         overlayPopupBreak.style.display = "none";
-        overlayMessageBreak.style.display = "none";
-        overlayButtonFinished.style.display = "none";
-        overlayButtonNotFinished.style.display = "none";
-        overlayImageBreak.style.display = "none";
     });   
 
     overlayButtonFinished.addEventListener("click", () => {
@@ -108,40 +98,22 @@ function showOverlayEndFocus() {
             });
         })
         
-
-        overlayBreak.style.display = "none";
+        divBlur.style.display = "none";
         overlayPopupBreak.style.display = "none";
-        overlayMessageBreak.style.display = "none";
-        overlayButtonFinished.style.display = "none";
-        overlayButtonNotFinished.style.display = "none";
-        overlayImageBreak.style.display = "none";
     }); 
 
 }
     
 function showOverlayEndBreak() {
-    const overlayBreak = document.createElement("div");
-    overlayBreak.classList.add("my-overlay");
-    document.body.appendChild(overlayBreak);
-    
-    const overlayPopupBreak = document.createElement("div");
-    overlayPopupBreak.classList.add("my-overlay-popup-blocked");
-    document.body.appendChild(overlayPopupBreak);
-    
-    const overlayMessageBreak = document.createElement("p");
-    overlayMessageBreak.classList.add("my-overlay-message");
-    overlayMessageBreak.innerText = `Your break is over, time to start again ? `;
-    overlayPopupBreak.appendChild(overlayMessageBreak);
-    
+    let divBlur = displayBlur();
+    let divBlockText = displayBlockText(`Your break is over, time to start again ? `);
+
     const overlayButtonBreakFinished = document.createElement("button");
     overlayButtonBreakFinished.classList.add("my-overlay-button-finished");
     overlayButtonBreakFinished.innerText = "Yes";
-    overlayPopupBreak.appendChild(overlayButtonBreakFinished);
-    
-    const overlayImageBreak = document.createElement("img");
-    overlayImageBreak.classList.add("my-overlay-image");
-    overlayImageBreak.src = chrome.runtime.getURL("scripts/dragon_icon.png");
-    overlayPopupBreak.appendChild(overlayImageBreak);
+    divBlockText.appendChild(overlayButtonBreakFinished);
+
+    displayImage(divBlockText);
     
     overlayButtonBreakFinished.addEventListener("click", () => {
 
@@ -152,40 +124,51 @@ function showOverlayEndBreak() {
                 startTimer(breakEndTime, 1);
             });
         });
-        
-        overlayBreak.style.display = "none";
-        overlayPopupBreak.style.display = "none";
-        overlayMessageBreak.style.display = "none";
-        overlayButtonBreakFinished.style.display = "none";
-        overlayImageBreak.style.display = "none";
+
+        divBlur.style.display = "none";
+        divBlockText.style.display = "none"
     })
 };
 
 function showOverlayEndBigBreak() {
+    let divBlur = displayBlur();
+    let divBlockText = displayBlockText(`Big Break over - Do you want to start a new task? `);
+    displayImage(divBlockText);
+
+    window.addEventListener("click", () => {
+        divBlur.style.display = "none";
+        divBlockText.style.display = "none";
+    })
+}
+
+
+/*****DISPLAY OVERLAY*****
+**************************/
+function displayBlur() {
     const overlayBreak = document.createElement("div");
     overlayBreak.classList.add("my-overlay");
     document.body.appendChild(overlayBreak);
-    
+
+    return overlayBreak;
+}
+
+function displayBlockText(text) {
     const overlayPopupBreak = document.createElement("div");
     overlayPopupBreak.classList.add("my-overlay-popup-blocked");
     document.body.appendChild(overlayPopupBreak);
-
+    
     const overlayMessageBreak = document.createElement("p");
     overlayMessageBreak.classList.add("my-overlay-message");
-    overlayMessageBreak.innerText = `Big Break over - Do you want to start a new task ? `;
+    overlayMessageBreak.innerText = text;
     overlayPopupBreak.appendChild(overlayMessageBreak);
 
+    return overlayPopupBreak;
+}
+
+function displayImage(div) {
     const overlayImageBreak = document.createElement("img");
     overlayImageBreak.classList.add("my-overlay-image");
     overlayImageBreak.src = chrome.runtime.getURL("scripts/dragon_icon.png");
-    overlayPopupBreak.appendChild(overlayImageBreak);
-
-    window.addEventListener("click", () => {
-        overlayBreak.style.display = "none";
-        overlayPopupBreak.style.display = "none";
-        overlayMessageBreak.style.display = "none";
-        overlayImageBreak.style.display = "none";
-    })
+    div.appendChild(overlayImageBreak);
 }
-                
             
