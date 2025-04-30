@@ -9,10 +9,10 @@ body {
 
 }
    
-
 img {
     width: 30%;
 }
+
 .footer-popup {
     display: flex;
     justify-content: space-between;
@@ -26,7 +26,6 @@ button {
     border-radius: 2em;
     padding: 5%;
     transition: transform 0.4s;
-    
 }
 
 button:hover {
@@ -40,8 +39,8 @@ input {
     border-radius: 0.5em;
     margin-top :0.5em;
     width:51.5%;
-    
 }
+
  select, textarea {
 margin-top: 0.5em;
  }

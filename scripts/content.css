@@ -1,0 +1,55 @@
+.my-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 8000;
+}
+
+.my-overlay-popup-blocked {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: white;
+    top: 25%;
+    left: 25%;
+    right: 25%;
+    width: 50%;
+    height: 50%;
+    border-radius: 10px;
+    z-index: 9000;
+}
+
+.my-overlay-message {
+    color: #000;
+}
+
+.my-overlay-image {
+    width: 30%;
+}
+
+.my-overlay-button-finished {
+    margin: 3%;
+    padding: 12px 28px;
+    background-color: #04AA6D;
+    border-radius: 2em;
+    transition: transform 0.4s;
+    cursor: pointer;
+}
+
+.my-overlay-button-not-finished {
+    padding: 12px 28px;
+    background-color: #F44336;
+    border-radius: 2em;
+    transition: transform 0.4s;
+    cursor: pointer;
+}
+
+.my-overlay-button-not-finished:hover,
+.my-overlay-button-finished:hover {
+    transform: scale(1.1)
+}

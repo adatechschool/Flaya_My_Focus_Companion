@@ -4,8 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script defer src="scripts/content.js"></script>
+    <title>Flaya, my Focus Companion</title>
     <script defer src="popup.js"></script>
     <link rel="stylesheet" href="popup.css">
 </head>
@@ -22,12 +21,12 @@
             <label for="task">What do you want to do today?</label> <br>
             <input id="task" type="text">
         </div>
-
+        <br>
         <div>
             <label for="focus-time"> <strong>Focus time:</strong> For how long?</label> <br>
             <select name="focus-time" id="focus-time">
                 <option value="">--Please choose an option--</option>
-                <option value="20">20</option>
+                <option value="0.1">test</option>
                 <option value="25">25</option>
                 <option value="30">30</option>
                 <option value="35">35</option>
@@ -46,16 +45,15 @@
             <label for="break-time"><strong>Big break:</strong> When you're done, enjoy a bigger break!</label> <br>
             <select name="break-time" id="break-time">
                 <option value="">--Please choose an option--</option>
-                <option value="15">15</option>
+                <option value="0.2">test</option>
                 <option value="20">20</option>
                 <option value="25">25</option>
                 <option value="30">30</option>
             </select>
-
         </div>
-
+        <br>
         <div>
-            <label for="blocked-url">Websites to block?</label> <br>
+            <label for="blocked-url"><strong>Websites to block?</strong></label> <br>
             <textarea id="blocked-url" rows="5" class="blocked-url" type="url" placeholder="example.com"></textarea>
         </div>
 
