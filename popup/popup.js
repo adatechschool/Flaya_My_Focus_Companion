@@ -35,9 +35,10 @@ function displaySecondPopup(userTask) {
     const durationMinutes = focusTime.value;
 
     const endTime = Date.now() + durationMinutes * 60 * 1000;
+    /**mettre duration 60 1000 ensemble pour set get */
     const task = document.querySelector("#task").value;
 
-    chrome.storage.local.set({ endTime: endTime, task: task}, () => {
+    chrome.storage.local.set({ endTime: endTime, task: task, time: durationMinutes}, () => {
         startTimer(endTime);
         chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
             chrome.tabs.sendMessage(tabs[0].id, { action: "startFocusTimer" });
