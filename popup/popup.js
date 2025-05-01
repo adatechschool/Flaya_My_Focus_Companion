@@ -30,6 +30,7 @@ function startTimer(timeUser) {
 function displayTimerPopup(userTask) {
     form.style.display = "none";
     focusTimer.style.display = "block";
+    document.body.classList.add('timer-active');
     taskUser.innerText = userTask;
 
     const durationMinutes = focusTime.value;
@@ -58,6 +59,7 @@ chrome.storage.local.get(['endTime', 'task'], (result) => {
         if (result.endTime > now) {
             form.style.display = "none";
             focusTimer.style.display = "block";
+            document.body.classList.add('timer-active');
             taskUser.innerText = result.task;
             startTimer(result.endTime);
         }

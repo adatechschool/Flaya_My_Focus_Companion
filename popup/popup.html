@@ -18,49 +18,43 @@
     <section class="form" id="form">
         <h1>Flaya, my Focus Companion</h1>
         <div class="divInputs">
-            <label for="task">What do you want to do today?</label> <br>
+            <label for="task"><strong>What do you want to do today?</strong></label> <br>
             <input id="task" type="text">
         </div>
-        <br>
         <div>
-            <label for="focus-time"> <strong>Focus time:</strong> For how long?</label> <br>
+            <label for="focus-time"> <strong>Focus session:</strong></label> <br>
             <select name="focus-time" id="focus-time">
-                <option value="">--Please choose an option--</option>
-                <option value="0.5">demo</option>
-                <option value="25">25</option>
-                <option value="30">30</option>
-                <option value="35">35</option>
-                <option value="40">40</option>
-                <option value="45">45</option>
+                <option value="">Select an option</option>
+                <option value="0.5">Demo</option>
+                <option value="25">25 min</option>
+                <option value="30">30 min</option>
+                <option value="35">35 min</option>
+                <option value="40">40 min</option>
+                <option value="45">45 min</option>
             </select>
         </div>
-
         <div>
             <p>
-                <strong>Short break:</strong> After each focus-session, take a 5min break.
+                <strong>Mini break:</strong> After each focus session, take a 5min break.
             </p>
         </div>
-
         <div>
             <label for="break-time"><strong>Big break:</strong> When you're done, enjoy a bigger break!</label> <br>
             <select name="break-time" id="break-time">
-                <option value="">--Please choose an option--</option>
-                <option value="0.5">demo</option>
-                <option value="20">20</option>
-                <option value="25">25</option>
-                <option value="30">30</option>
+                <option value="">Select an option</option>
+                <option value="0.5">Demo</option>
+                <option value="20">20 min</option>
+                <option value="25">25 min</option>
+                <option value="30">30 min</option>
             </select>
         </div>
         <br>
-        <div>
-            <label for="blocked-url"><strong>Websites to block?</strong></label> <br>
+        <label for="blocked-url"><strong>Distracting websites:</strong> Blocked during focus sessions.</label> <br>
+        <div class="blocked-url-area">
             <textarea id="blocked-url" rows="5" class="blocked-url" type="url" placeholder="example.com"></textarea>
-        </div>
-
-        <div class="footer-popup">
-            <button id="start-button">START</button>
             <img src="images/dragon_icon.png" alt="small-dragon">
         </div>
+        <button id="start-button">START</button>
     </section>
 </body>
 
